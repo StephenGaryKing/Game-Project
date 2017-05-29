@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Game state files">
+      <UniqueIdentifier>{b59b5dd7-9abf-4e62-ab95-c46b112b296e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game state files\States">
+      <UniqueIdentifier>{db031475-304c-45b9-ab95-791334642f2b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application2D.cpp">
@@ -21,28 +27,43 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Tank.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Shell.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Animation.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStateManager.cpp">
+      <Filter>Game state files</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuState.cpp">
+      <Filter>Game state files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="PauseState.cpp">
+      <Filter>Game state files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="InGameState.cpp">
+      <Filter>Game state files\States</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Tank.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Shell.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStateManager.h">
+      <Filter>Game state files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>Game state files</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseState.h">
+      <Filter>Game state files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuState.h">
+      <Filter>Game state files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="InGameState.h">
+      <Filter>Game state files\States</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

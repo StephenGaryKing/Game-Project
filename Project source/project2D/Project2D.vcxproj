@@ -63,7 +63,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)/MatrixLibrary;$(SolutionDir)/MatrixLibrary/Matrices;$(SolutionDir)/MatrixLibrary/Vectors;$(SolutionDir)/ColliderLibrary</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/bootstrap;$(SolutionDir)/MatrixLibrary;$(SolutionDir)/MatrixLibrary/Matrices;$(SolutionDir)/MatrixLibrary/Vectors;$(SolutionDir)/ColliderLibrary</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -93,17 +93,25 @@
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Application2D.cpp" />
+    <ClCompile Include="GameStateManager.cpp" />
+    <ClCompile Include="InGameState.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Shell.cpp" />
-    <ClCompile Include="Tank.cpp" />
+    <ClCompile Include="MenuState.cpp" />
+    <ClCompile Include="PauseState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Application2D.h" />
-    <ClInclude Include="Shell.h" />
-    <ClInclude Include="Tank.h" />
+    <ClInclude Include="GameState.h" />
+    <ClInclude Include="GameStateManager.h" />
+    <ClInclude Include="InGameState.h" />
+    <ClInclude Include="MenuState.h" />
+    <ClInclude Include="PauseState.h" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\bootstrap\Bootstrap.vcxproj">
+      <Project>{af59bb0b-e059-4773-83dc-728a949647da}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\ColliderLibrary\ColliderLibrary.vcxproj">
       <Project>{a02a1087-69b6-455c-b400-296ced8f4127}</Project>
     </ProjectReference>
