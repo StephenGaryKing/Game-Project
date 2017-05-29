@@ -1,0 +1,8 @@
+﻿  Vector4.cpp
+  Vector3.cpp
+  Vector2.cpp
+  Matrix4.cpp
+  Matrix3.cpp
+  Matrix2.cpp
+  Generating Code...
+  MatrixLibrary.vcxproj -> E:\TO DO\Maths Demo Project Source\Debug\MatrixLibrary.lib
