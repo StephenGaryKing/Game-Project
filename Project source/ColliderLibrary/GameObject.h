@@ -40,16 +40,16 @@ public:
 	// deconstructor
 	~GameObject();
 
-	bool enabled = true; // this determines if this GameObject should calculate collisions and be drawn
-	Matrix3 transform;
-	aie::Texture* texture;
-	GameObject* parent = nullptr;
-	std::vector<GameObject*> children;
-	std::vector<Vector3> localPoints;
+	bool m_enabled = true; // this determines if this GameObject should calculate collisions and be drawn
+	Matrix3 m_transform;
+	aie::Texture* m_texture;
+	GameObject* m_parent = nullptr;
+	std::vector<GameObject*> m_children;
+	std::vector<Vector3> m_points;
 
-	float currentRotation = 0;
-	Vector3 size;
-	Vector3 min;
-	Vector3 max;
+	float m_currentRotation = 0;
+	Vector3 m_size;
+	Vector3 m_min;
+	Vector3 m_max;
 };
 

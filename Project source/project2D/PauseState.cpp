@@ -1,8 +1,8 @@
 #include "PauseState.h"
 
-void PauseState::onUpdate(aie::Input* input, float deltaTime)
+int PauseState::onUpdate(aie::Input* input, float deltaTime)
 {
-
+	return -1;
 }
 
 void PauseState::onDraw(aie::Renderer2D* renderer)

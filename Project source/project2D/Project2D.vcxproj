@@ -63,7 +63,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)/bootstrap;$(SolutionDir)/MatrixLibrary;$(SolutionDir)/MatrixLibrary/Matrices;$(SolutionDir)/MatrixLibrary/Vectors;$(SolutionDir)/ColliderLibrary</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/bootstrap;$(SolutionDir)/MatrixLibrary/Matrices;$(SolutionDir)/MatrixLibrary/Vectors;$(SolutionDir)/ColliderLibrary;$(SolutionDir)/UserInterface</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -93,20 +93,25 @@
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Application2D.cpp" />
+    <ClCompile Include="Asteroid.cpp" />
     <ClCompile Include="GameStateManager.cpp" />
     <ClCompile Include="InGameState.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="PauseState.cpp" />
+    <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Application2D.h" />
+    <ClInclude Include="Asteroid.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameStateManager.h" />
     <ClInclude Include="InGameState.h" />
+    <ClInclude Include="ListOfStates.h" />
     <ClInclude Include="MenuState.h" />
     <ClInclude Include="PauseState.h" />
+    <ClInclude Include="Player.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\bootstrap\Bootstrap.vcxproj">
@@ -117,6 +122,9 @@
     </ProjectReference>
     <ProjectReference Include="..\MatrixLibrary\MatrixLibrary.vcxproj">
       <Project>{7a846b7c-5d06-480f-a73b-363fe4632197}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\UserInterface\UserInterface.vcxproj">
+      <Project>{933bd5ee-1969-4bf4-a151-896a4743f2d2}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

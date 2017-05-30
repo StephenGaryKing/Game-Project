@@ -1,32 +1,36 @@
 #include "InGameState.h"
+#include "Player.h"
+#include "Asteroid.h"
 
 InGameState::InGameState()
 {
 	m_playerTexture = new aie::Texture("./textures/ship.png");
 	m_asteroidTexture = new aie::Texture("./textures/rock_small.png");
 
-	m_player = new GameObject(Matrix3(), m_playerTexture, {});
+	m_player = new Player(Matrix3(), m_playerTexture, {Vector3()});
 	m_asteroids = new GameObject*[m_amountOfAsteroids];
 	for (int i = 0; i < m_amountOfAsteroids; i++)
 	{
-		m_asteroids[i] = new GameObject(Matrix3(), m_asteroidTexture, {});
-		m_asteroids[i]->transform[2] = { 300,300,1 };
+		m_asteroids[i] = new Asteroid(Matrix3(), m_asteroidTexture, {Vector3()});
 	}
 }
 
-void InGameState::onUpdate(aie::Input* input, float deltaTime)
+int InGameState::onUpdate(aie::Input* input, float deltaTime)
 {
-	m_player->transform[2].x = (float)input->getMouseX();
-	m_player->transform[2].y = (float)input->getMouseY();
+	m_player->Update(deltaTime, input);
 	m_player->UpdateCollisions(m_asteroids, m_amountOfAsteroids);
+	for (int i = 0; i < m_amountOfAsteroids; i++)
+	{
+		m_asteroids[i]->Update(deltaTime, input);
+	}
+	return -1;
 }
 
 void InGameState::onDraw(aie::Renderer2D* renderer)
 {
-	renderer->setRenderColour(1.0f, 1.0f, 1.0f, 1.0f);
-	renderer->drawSpriteTransformed3x3(m_player->texture, m_player->transform);
+	m_player->Draw(renderer);
 	for (int i = 0; i < m_amountOfAsteroids; i++)
 	{
-		renderer->drawSpriteTransformed3x3(m_asteroids[i]->texture, m_asteroids[i]->transform);
+		m_asteroids[i]->Draw(renderer);
 	}
 }

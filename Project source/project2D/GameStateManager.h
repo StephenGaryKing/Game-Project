@@ -18,13 +18,16 @@ public:
 	void pushState(int id);
 	void popState();
 
-	void update(aie::Input* input, float deltaTime);
+	int update(aie::Input* input, float deltaTime);
 
 	void draw(aie::Renderer2D* renderer)
 	{
 		//draw from the bottom of the stack up
-		for (auto state : m_stateStack)
-			state->onDraw(renderer);
+		//for (auto state : m_stateStack)
+		//	state->onDraw(renderer);
+
+		// just draw the top of the stack
+		m_stateStack.back()->onDraw(renderer);
 	}
 
 	GameState* getTopState() const { return m_stateStack.back(); }

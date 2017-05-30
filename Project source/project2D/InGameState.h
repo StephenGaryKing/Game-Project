@@ -9,17 +9,17 @@ public:
 	InGameState();
 	virtual ~InGameState() {}
 
-	virtual void onUpdate(aie::Input* input, float deltaTime);
+	virtual int onUpdate(aie::Input* input, float deltaTime);
 	virtual void onDraw(aie::Renderer2D* renderer);
 
 private:
 
-	GameObject*		m_player;
-	GameObject**	m_asteroids;
+	GameObject*						m_player;
+	GameObject**					m_asteroids;
 
-	aie::Texture*	m_playerTexture;
-	aie::Texture*	m_asteroidTexture;
+	aie::Texture*					m_playerTexture;
+	aie::Texture*					m_asteroidTexture;
 
-	int				m_amountOfAsteroids = 10;
+	int								m_amountOfAsteroids = 10;
 };
 

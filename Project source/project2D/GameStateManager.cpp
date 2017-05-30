@@ -7,6 +7,8 @@ void GameStateManager::registerState(int id, GameState* state)
 
 void GameStateManager::pushState(int id)
 {
+	if (m_stateStack.size() > 0)
+		m_stateStack.back()->m_active = false;
 	m_pushedStates.push_back(m_registeredStates[id]);
 }
 
@@ -15,7 +17,7 @@ void GameStateManager::popState()
 	m_popState = true;
 }
 
-void GameStateManager::update(aie::Input* input, float deltaTime)
+int GameStateManager::update(aie::Input* input, float deltaTime)
 {
 	while (m_popState)
 	{
@@ -46,6 +48,8 @@ void GameStateManager::update(aie::Input* input, float deltaTime)
 	}
 	m_pushedStates.clear();
 
-	for (auto state : m_stateStack)
-		state->onUpdate(input, deltaTime);
+	//for (auto state : m_stateStack)
+		//state->onUpdate(input, deltaTime);
+
+	return m_stateStack.back()->onUpdate(input, deltaTime);
 }

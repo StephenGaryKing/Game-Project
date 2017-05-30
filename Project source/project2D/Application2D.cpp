@@ -27,7 +27,7 @@ bool Application2D::startup() {
 	m_gameStateManager->registerState((unsigned int)eGameState::PAUSE, new PauseState());
 
 	m_gameStateManager->pushState((unsigned int)eGameState::MENU);
-	m_gameStateManager->update(m_input,  0);
+	m_gameStateManager->update(m_input, 0);
 
 	setBackgroundColour(0.7f, 0.7f, 0.7f, 1);
 	m_2dRenderer = new aie::Renderer2D();
@@ -39,7 +39,7 @@ bool Application2D::startup() {
 	m_cameraX = 0;
 	m_cameraY = 0;
 	m_timer = 0;
-
+	
 	return true;
 }
 
@@ -53,7 +53,11 @@ void Application2D::update(float deltaTime) {
 	if (m_gameStateManager->activeStateCount() > 0)
 	{
 		m_timer += deltaTime;
-		m_gameStateManager->update(m_input, deltaTime);
+		int stateToPush = m_gameStateManager->update(m_input, deltaTime);
+		if (stateToPush >= 0)
+		{
+			m_gameStateManager->pushState((unsigned int)stateToPush);
+		}
 	}
 	
 
@@ -78,6 +82,7 @@ void Application2D::draw() {
 		m_gameStateManager->draw(m_2dRenderer);
 	}
 	//draw FPS
+	m_2dRenderer->setRenderColour(1.0f, 1.0f, 1.0f, 1.0f);
 	char fps[32];
 	sprintf_s(fps, 32, "FPS: %i", getFPS());
 	m_2dRenderer->drawText(m_font, fps, 0, 720 - 32);

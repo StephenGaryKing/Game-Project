@@ -5,18 +5,18 @@ GameObject::GameObject()
 {
 }
 
-GameObject::GameObject(Matrix3 trans, aie::Texture* tex, std::vector<Vector3> points)
+GameObject::GameObject(Matrix3 transform, aie::Texture* texture, std::vector<Vector3> points)
 {
 	// set the position, rotation, and texture to the values given
-	transform = trans;
-	texture = tex;
+	m_transform = transform;
+	m_texture = texture;
 	// if there is a texture provided set the half extents in x and y equal to half the width and height of the texture
-	if (texture != nullptr)
-		size = { (float)texture->getWidth() / 2, (float)texture->getHeight() / 2, 1 };
+	if (m_texture != nullptr)
+		m_size = { (float)m_texture->getWidth() / 2, (float)m_texture->getHeight() / 2, 1 };
 	// initialize the points that will be used to for collisions
 	for (int i = 0; i < (int)points.size(); i++)
 	{
-		localPoints.push_back(points[i]);
+		m_points.push_back(points[i]);
 	}
 }
 
@@ -24,17 +24,17 @@ void GameObject::RotateGameObject(float angle)
 {
 	// create a matrix to rotate the game object
 	Matrix3 rotationMatrix;
-	currentRotation = angle;
+	m_currentRotation = angle;
 	rotationMatrix.setRotateZ(angle);
 	// apply rotation matrix
-	transform = transform * rotationMatrix;
+	m_transform = m_transform * rotationMatrix;
 }
 
 void GameObject::ScaleGameObject(Vector3 scale)
 {
 	// enlarge the GameObject by (scale.x, scale.y, scale.z)
-	transform[0] = transform[0] * scale;
-	transform[1] = transform[1] * scale;
+	m_transform[0] = m_transform[0] * scale;
+	m_transform[1] = m_transform[1] * scale;
 }
 
 void GameObject::TranslateGameObject(Vector3 displacement)
@@ -42,90 +42,90 @@ void GameObject::TranslateGameObject(Vector3 displacement)
 	// move the GameObject by (displacement.x, displacement.y, displacement.z) relative to its current position
 	Matrix3 displacementMatrix;
 	displacementMatrix[2] = displacement;
-	transform = transform * displacementMatrix;
+	m_transform = m_transform * displacementMatrix;
 }
 
 void GameObject::Draw(aie::Renderer2D* renderer)
 {
 	// if GameObject has a texture to draw
-	if (texture != nullptr)
+	if (m_texture != nullptr)
 	{
 		Matrix3 positionToDraw;
 		GameObject* lastParent = nullptr;
-		GameObject* currentParent = parent;
+		GameObject* currentParent = m_parent;
 		// loop through the hierachy of this GameObject from parent to child to ditermine the correct order to apply transformations
-		while (lastParent != parent)
+		while (lastParent != m_parent)
 		{
-			while (currentParent->parent != lastParent)
+			while (currentParent->m_parent != lastParent)
 			{
-				currentParent = currentParent->parent;
+				currentParent = currentParent->m_parent;
 			}
 			// apply the current parent's position and rotation to the current position to draw
-			positionToDraw = positionToDraw * currentParent->transform;
+			positionToDraw = positionToDraw * currentParent->m_transform;
 			lastParent = currentParent;
-			currentParent = parent;
+			currentParent = m_parent;
 		}
 		// add the local position and rotation to the current position to draw
-		positionToDraw = positionToDraw * transform;
+		positionToDraw = positionToDraw * m_transform;
 		// draw the GameObject using its texture
-		renderer->drawSpriteTransformed3x3(texture, positionToDraw);
+		renderer->drawSpriteTransformed3x3(m_texture, positionToDraw);
 
 		// draw Debug lines
-		if ((int)localPoints.size() == 1)
+		if ((int)m_points.size() == 1)
 		{
 			renderer->setRenderColour(1.0f, 1.0f, 1.0f, 0.5f);
-			renderer->drawCircle(transform[2].x, transform[2].y, size.x);
+			renderer->drawCircle(m_transform[2].x, m_transform[2].y, m_size.x);
 			renderer->setRenderColour(1.0f, 1.0f, 1.0f, 1.0f);
 		}
-		renderer->drawLine(min.x, min.y, max.x, min.y);
-		renderer->drawLine(max.x, min.y, max.x, max.y);
-		renderer->drawLine(max.x, max.y, min.x, max.y);
-		renderer->drawLine(min.x, max.y, min.x, min.y);
+		renderer->drawLine(m_min.x, m_min.y, m_max.x, m_min.y);
+		renderer->drawLine(m_max.x, m_min.y, m_max.x, m_max.y);
+		renderer->drawLine(m_max.x, m_max.y, m_min.x, m_max.y);
+		renderer->drawLine(m_min.x, m_max.y, m_min.x, m_min.y);
 	}
-	for (int i = 0; i < (int)children.size(); i++)
+	for (int i = 0; i < (int)m_children.size(); i++)
 	{
 		// draw the children of this GameObject
-		children[i]->Draw(renderer);
+		m_children[i]->Draw(renderer);
 	}
 }
 
 void GameObject::Update(float deltaTime, aie::Input* input)
 {
 	// update the min and max points of this GameObject
-	if ((int)localPoints.size() > 0)
+	if ((int)m_points.size() > 0)
 	{
 		Matrix3 globalPosition;
 		GameObject* lastParent = nullptr;
-		GameObject* currentParent = parent;
-		while (lastParent != parent)
+		GameObject* currentParent = m_parent;
+		while (lastParent != m_parent)
 			{
-				while (currentParent->parent != lastParent)
+				while (currentParent->m_parent != lastParent)
 				{
-					currentParent = currentParent->parent;
+					currentParent = currentParent->m_parent;
 				}
-				globalPosition = globalPosition * currentParent->transform;
+				globalPosition = globalPosition * currentParent->m_transform;
 				lastParent = currentParent;
-				currentParent = parent;
+				currentParent = m_parent;
 			}
-		globalPosition = globalPosition * transform;
-		min = globalPosition * localPoints[0];
-		max = globalPosition * localPoints[0];
-		for (int i = 0; i < (int)localPoints.size(); i++)
+		globalPosition = globalPosition * m_transform;
+		m_min = globalPosition * m_points[0];
+		m_max = globalPosition * m_points[0];
+		for (int i = 0; i < (int)m_points.size(); i++)
 		{
-			if (min.x > (globalPosition * localPoints[i]).x)
-				min.x = (globalPosition * localPoints[i]).x;
-			if (min.y > (globalPosition * localPoints[i]).y)
-				min.y = (globalPosition * localPoints[i]).y;
-			if (max.x < (globalPosition * localPoints[i]).x)
-				max.x = (globalPosition * localPoints[i]).x;
-			if (max.y < (globalPosition * localPoints[i]).y)
-				max.y = (globalPosition * localPoints[i]).y;
+			if (m_min.x > (globalPosition * m_points[i]).x)
+				m_min.x = (globalPosition * m_points[i]).x;
+			if (m_min.y > (globalPosition * m_points[i]).y)
+				m_min.y = (globalPosition * m_points[i]).y;
+			if (m_max.x < (globalPosition * m_points[i]).x)
+				m_max.x = (globalPosition * m_points[i]).x;
+			if (m_max.y < (globalPosition * m_points[i]).y)
+				m_max.y = (globalPosition * m_points[i]).y;
 		}
 	}
-	for (int i = 0; i < (int)children.size(); i++)
+	for (int i = 0; i < (int)m_children.size(); i++)
 	{
 		// update the min and max points of this GameObject's children
-		children[i]->Update(deltaTime, input);
+		m_children[i]->Update(deltaTime, input);
 	}
 }
 
@@ -148,7 +148,7 @@ void GameObject::UpdateCollisions(GameObject* listOfGameObjects[], int amountOfG
 
 void GameObject::HandleCollision(GameObject* other, Hit hit)
 {
-	if (enabled)
+	if (m_enabled)
 	{
 		// handle the collision of this game object and the other game object
 		HandleCollision(hit);
@@ -164,35 +164,35 @@ Hit GameObject::BroadPhaseCollision(GameObject* other)
 {
 	Hit hit;
 	//if the other GameObject is a box
-	if ((int)other->localPoints.size() == 4)
+	if ((int)other->m_points.size() == 4)
 	{
 		//if this is a plane
-		if ((int)localPoints.size() == 2)
+		if ((int)m_points.size() == 2)
 		{
 			return PlaneBox(other);
 		}
 		//if this is a box
-		if ((int)localPoints.size() == 4)
+		if ((int)m_points.size() == 4)
 		{
 			return BoxBoxCollision(other);
 		}
 		//if this is a circle
-		if ((int)localPoints.size() == 1)
+		if ((int)m_points.size() == 1)
 		{
 			return CircleBoxCollision(other);
 		}
 		return hit;
 	}
 	//if the other GameObject is a circle
-	if ((int)other->localPoints.size() == 1)
+	if ((int)other->m_points.size() == 1)
 	{
 		//if this is a box
-		if ((int)localPoints.size() == 4)
+		if ((int)m_points.size() == 4)
 		{
 			return CircleBoxCollision(other);
 		}
 		//if this is a circle
-		if ((int)localPoints.size() == 1)
+		if ((int)m_points.size() == 1)
 		{
 			hit = CircleCircleCollision(other);
 			if (hit.hitting)
@@ -209,12 +209,12 @@ Hit GameObject::PlaneBox(GameObject* other)
 	// perform a plane Vs point test for each point in the game object's collider
 	Hit hit;
 	Vector3 normal;
-	normal = localPoints[0].GetNormalised();
+	normal = m_points[0].GetNormalised();
 	normal = Vector3(-normal.y, normal.x, 1);
-	for (int i = 0; i < (int)other->localPoints.size(); i++)
+	for (int i = 0; i < (int)other->m_points.size(); i++)
 	{
-		float side = (other->transform * other->localPoints[i]).dot(normal);
-		side += localPoints[0].z;
+		float side = (other->m_transform * other->m_points[i]).dot(normal);
+		side += m_points[0].z;
 		if (side < 0)
 		{
 			// return early if a point is on the other side of the plane
@@ -229,13 +229,13 @@ Hit GameObject::BoxBoxCollision(GameObject* other)
 {
 	Hit hit;
 	// compare the max and min of each GameObject to ditermine if there is an overlap
-	if (max.x < other->min.x)
+	if (m_max.x < other->m_min.x)
 		return hit;
-	if (min.x > other->max.x)
+	if (m_min.x > other->m_max.x)
 		return hit;;
-	if (max.y < other->min.y)
+	if (m_max.y < other->m_min.y)
 		return hit;;
-	if (min.y > other->max.y)
+	if (m_min.y > other->m_max.y)
 		return hit;
 	hit.hitting = true;
 	return hit;
@@ -245,26 +245,26 @@ Hit GameObject::BoxCircleCollision(GameObject* other)
 {
 	Hit hit;
 	// if the circle's center point is inside of the box there is a collision
-	if ((transform[2].x < other->max.x && transform[2].x >other->min.x) && (transform[2].y < other->max.y && transform[2].y > other->min.y))
+	if ((m_transform[2].x < other->m_max.x && m_transform[2].x >other->m_min.x) && (m_transform[2].y < other->m_max.y && m_transform[2].y > other->m_min.y))
 	{
-		hit.point = transform[2];
+		hit.point = m_transform[2];
 		hit.hitting = true;
 		return hit;
 	}
-	Vector3 clampedPos = transform[2];
+	Vector3 clampedPos = m_transform[2];
 
 	//clamp the position
-	if (transform[2].x > other->min.x)
-		clampedPos.x = other->min.x;
-	if (transform[2].x > other->max.x)
-		clampedPos.x = other->max.x;
-	if (transform[2].y > other->min.y)
-		clampedPos.y = other->min.y;
-	if (transform[2].y > other->max.y)
-		clampedPos.y = other->max.y;
+	if (m_transform[2].x > other->m_min.x)
+		clampedPos.x = other->m_min.x;
+	if (m_transform[2].x > other->m_max.x)
+		clampedPos.x = other->m_max.x;
+	if (m_transform[2].y > other->m_min.y)
+		clampedPos.y = other->m_min.y;
+	if (m_transform[2].y > other->m_max.y)
+		clampedPos.y = other->m_max.y;
 
 	// if the the hit.point is inside the circle
-	if ((transform[2].x < hit.point.x && transform[2].x > hit.point.x) && (transform[2].y < hit.point.y && transform[2].y > hit.point.y))
+	if ((m_transform[2].x < hit.point.x && m_transform[2].x > hit.point.x) && (m_transform[2].y < hit.point.y && m_transform[2].y > hit.point.y))
 	{
 		hit.point = clampedPos;
 		hit.hitting = true;
@@ -283,13 +283,13 @@ Hit GameObject::CircleCircleCollision(GameObject* other)
 {
 	Hit hit;
 	// if the distance between the center's of each circle is smaller than their half extents divided by two they are colliding
-	float displacement = (transform[2] - other->transform[2]).magnitude();
-	if (other->size.x + size.x > displacement)
+	float displacement = (m_transform[2] - other->m_transform[2]).magnitude();
+	if (other->m_size.x + m_size.x > displacement)
 	{
-		hit.point = transform[2] - (other->transform[2]);
+		hit.point = m_transform[2] - (other->m_transform[2]);
 		hit.point = hit.point.GetNormalised();
-		hit.point = hit.point * (other->size.x + size.x);
-		hit.point = hit.point + (other->transform[2]);
+		hit.point = hit.point * (other->m_size.x + m_size.x);
+		hit.point = hit.point + (other->m_transform[2]);
 		hit.hitting = true;
 		return hit;
 	}
@@ -299,8 +299,8 @@ Hit GameObject::CircleCircleCollision(GameObject* other)
 GameObject::~GameObject()
 {
 	// delete the children of this game object when it is removed
-	for (int i = 0; i < (int)children.size(); i++)
+	for (int i = 0; i < (int)m_children.size(); i++)
 	{
-		delete children[i];
+		delete m_children[i];
 	}
 }

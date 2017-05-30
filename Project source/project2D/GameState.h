@@ -1,6 +1,8 @@
 #pragma once
+#include "Application.h"
 #include "Renderer2D.h"
 #include "Input.h"
+#include "ListOfStates.h"
 class GameState
 {
 	friend class GameStateManager;
@@ -11,7 +13,7 @@ public:
 	bool isActive() const { return m_active; }
 
 protected:
-	virtual void onUpdate(aie::Input* input, float deltaTime) = 0;
+	virtual int onUpdate(aie::Input* input, float deltaTime) = 0;
 	virtual void onDraw(aie::Renderer2D* renderer) = 0;
 
 	void enter() { m_active = true; onEnter(); }

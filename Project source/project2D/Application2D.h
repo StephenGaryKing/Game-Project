@@ -6,14 +6,7 @@
 #include "GameObject.h"
 #include "Input.h"
 #include "GameStateManager.h"
-
-enum class eGameState
-{
-	MENU,
-	INGAME,
-	PAUSE,
-	STATE_COUNT
-};
+#include "ListOfStates.h"
 
 class Application2D : public aie::Application {
 

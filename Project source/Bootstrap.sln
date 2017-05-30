@@ -14,6 +14,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MatrixLibrary", "MatrixLibr
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ColliderLibrary", "ColliderLibrary\ColliderLibrary.vcxproj", "{A02A1087-69B6-455C-B400-296CED8F4127}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UserInterface", "UserInterface\UserInterface.vcxproj", "{933BD5EE-1969-4BF4-A151-896A4743F2D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -50,6 +52,14 @@ Global
 		{A02A1087-69B6-455C-B400-296CED8F4127}.Release|x64.Build.0 = Release|x64
 		{A02A1087-69B6-455C-B400-296CED8F4127}.Release|x86.ActiveCfg = Release|Win32
 		{A02A1087-69B6-455C-B400-296CED8F4127}.Release|x86.Build.0 = Release|Win32
+		{933BD5EE-1969-4BF4-A151-896A4743F2D2}.Debug|x64.ActiveCfg = Debug|x64
+		{933BD5EE-1969-4BF4-A151-896A4743F2D2}.Debug|x64.Build.0 = Debug|x64
+		{933BD5EE-1969-4BF4-A151-896A4743F2D2}.Debug|x86.ActiveCfg = Debug|Win32
+		{933BD5EE-1969-4BF4-A151-896A4743F2D2}.Debug|x86.Build.0 = Debug|Win32
+		{933BD5EE-1969-4BF4-A151-896A4743F2D2}.Release|x64.ActiveCfg = Release|x64
+		{933BD5EE-1969-4BF4-A151-896A4743F2D2}.Release|x64.Build.0 = Release|x64
+		{933BD5EE-1969-4BF4-A151-896A4743F2D2}.Release|x86.ActiveCfg = Release|Win32
+		{933BD5EE-1969-4BF4-A151-896A4743F2D2}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
