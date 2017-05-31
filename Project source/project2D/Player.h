@@ -12,9 +12,12 @@ public:
 	virtual void HandleCollision(GameObject* other, Hit hit);
 	virtual void HandleCollision(Hit hit);
 
+	void Respawn();
+
 	~Player();
 
 private:
 	aie::Texture* explosionAnimation[8];
+	aie::Texture* spawnAnimation[16];
 };
 

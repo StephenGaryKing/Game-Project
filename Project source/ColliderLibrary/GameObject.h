@@ -26,7 +26,9 @@ public:
 	virtual void UpdateCollisions(GameObject* listOfGameObjects[], int amountOfGameObjects);
 	virtual void Draw(aie::Renderer2D* renderer);
 	virtual void HandleCollision(GameObject* other, Hit hit);
+	virtual void HandleCollision(GameObject* other);
 	virtual void HandleCollision(Hit hit);
+	bool IsColliding(GameObject* other);
 
 	//collisions
 	Hit BroadPhaseCollision(GameObject* other);

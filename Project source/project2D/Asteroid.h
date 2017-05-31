@@ -9,15 +9,16 @@ public:
 
 	virtual void Update(float deltaTime, aie::Input* input);
 	virtual void Draw(aie::Renderer2D* renderer);
-	virtual void HandleCollision(GameObject* other, Hit hit);
 	virtual void HandleCollision(Hit hit);
 
 	~Asteroid();
 
 private:
 	float m_speed;
+	float m_rotationSpeed;
 	Vector3 m_direction;
-	int m_maxSpeed = 10;
+	int m_maxSpeed = 4;
 	int m_minSpeed = 2;
+	int m_maxRotationSpeed = 1;
 };
 

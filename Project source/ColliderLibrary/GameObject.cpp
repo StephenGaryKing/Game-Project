@@ -146,6 +146,24 @@ void GameObject::UpdateCollisions(GameObject* listOfGameObjects[], int amountOfG
 	}
 }
 
+bool GameObject::IsColliding(GameObject* other)
+{
+	if (m_enabled && other->m_enabled)
+	{
+		Hit hit = BroadPhaseCollision(other);
+		if (hit.hitting)
+			return true;
+	}
+	return false;
+}
+
+void GameObject::HandleCollision(GameObject* other)
+{
+	Hit hit;
+	hit.hitting = true;
+	HandleCollision(other, hit);
+}
+
 void GameObject::HandleCollision(GameObject* other, Hit hit)
 {
 	if (m_enabled)
@@ -194,10 +212,7 @@ Hit GameObject::BroadPhaseCollision(GameObject* other)
 		//if this is a circle
 		if ((int)m_points.size() == 1)
 		{
-			hit = CircleCircleCollision(other);
-			if (hit.hitting)
-				HandleCollision(other, hit);
-			hit.hitting = false;
+			return CircleCircleCollision(other);
 		}
 		return hit;
 	}
