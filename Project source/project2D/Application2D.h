@@ -5,8 +5,9 @@
 #include "Audio.h"
 #include "GameObject.h"
 #include "Input.h"
-#include "GameStateManager.h"
-#include "ListOfStates.h"
+#include "ResourceManager.h"
+//#include "GameStateManager.h"
+//#include "ListOfStates.h"
 
 class Application2D : public aie::Application {
 
@@ -24,6 +25,9 @@ public:
 	virtual ~Application2D();
 
 protected:
+
+	ResourceManager<aie::Texture>	m_images;
+
 
 	aie::Input*			m_input;
 	GameStateManager*	m_gameStateManager;

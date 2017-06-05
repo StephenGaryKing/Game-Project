@@ -1,2 +1,14 @@
 ﻿  GameObject.cpp
-  ColliderLibrary.vcxproj -> L:\Git Hub Saves\Game Project\Project source\Debug\ColliderLibrary.lib
+l:\git hub saves\game project\project source\colliderlibrary\gameobject.cpp(12): error C2679: binary '=': no operator found which takes a right-hand operand of type 'aie::Texture *' (or there is no acceptable conversion)
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\memory(570): note: could be 'std::shared_ptr<Resource<aie::Texture>> &std::shared_ptr<Resource<aie::Texture>>::operator =(const std::shared_ptr<Resource<aie::Texture>> &) noexcept'
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\memory(552): note: or       'std::shared_ptr<Resource<aie::Texture>> &std::shared_ptr<Resource<aie::Texture>>::operator =(std::shared_ptr<Resource<aie::Texture>> &&) noexcept'
+  l:\git hub saves\game project\project source\colliderlibrary\gameobject.cpp(12): note: while trying to match the argument list '(TexturePtr, aie::Texture *)'
+l:\git hub saves\game project\project source\colliderlibrary\gameobject.cpp(15): error C2039: 'getWidth': is not a member of 'Resource<aie::Texture>'
+  l:\git hub saves\game project\project source\colliderlibrary\gameobject.h(8): note: see declaration of 'Resource<aie::Texture>'
+l:\git hub saves\game project\project source\colliderlibrary\gameobject.cpp(15): error C2039: 'getHeight': is not a member of 'Resource<aie::Texture>'
+  l:\git hub saves\game project\project source\colliderlibrary\gameobject.h(8): note: see declaration of 'Resource<aie::Texture>'
+l:\git hub saves\game project\project source\colliderlibrary\gameobject.cpp(15): error C2679: binary '=': no operator found which takes a right-hand operand of type 'initializer list' (or there is no acceptable conversion)
+  l:\git hub saves\game project\project source\matrixlibrary\vectors\vector3.h(41): note: could be 'Vector3 &Vector3::operator =(const Vector3 &)'
+  l:\git hub saves\game project\project source\colliderlibrary\gameobject.cpp(15): note: while trying to match the argument list '(Vector3, initializer list)'
+l:\git hub saves\game project\project source\colliderlibrary\gameobject.cpp(71): error C2664: 'void aie::Renderer2D::drawSpriteTransformed3x3(aie::Texture *,float *,float,float,float,float,float)': cannot convert argument 1 from 'TexturePtr' to 'aie::Texture *'
+  l:\git hub saves\game project\project source\colliderlibrary\gameobject.cpp(71): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called

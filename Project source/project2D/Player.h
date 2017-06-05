@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+
 class Player
 	:public GameObject
 {
@@ -17,7 +18,12 @@ public:
 	~Player();
 
 private:
-	aie::Texture* explosionAnimation[8];
-	aie::Texture* spawnAnimation[16];
+	TexturePtr m_explosionAnimation[8];
+	TexturePtr m_spawnAnimation[16];
+	bool m_dead = false;
+
+	float m_timePassed = 0;
+	float m_deathTime = 4.0f;
+	float m_respawnTime = 3.5f;
 };
 

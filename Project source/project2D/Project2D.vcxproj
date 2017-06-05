@@ -112,6 +112,8 @@
     <ClInclude Include="MenuState.h" />
     <ClInclude Include="PauseState.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="ResourceManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\bootstrap\Bootstrap.vcxproj">

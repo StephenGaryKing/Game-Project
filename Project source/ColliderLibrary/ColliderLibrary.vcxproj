@@ -77,7 +77,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)/MatrixLibrary/Matrices;$(SolutionDir)/MatrixLibrary/Vectors;$(SolutionDir)/bootstrap</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/Project2D;$(SolutionDir)/MatrixLibrary/Matrices;$(SolutionDir)/MatrixLibrary/Vectors;$(SolutionDir)/bootstrap</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

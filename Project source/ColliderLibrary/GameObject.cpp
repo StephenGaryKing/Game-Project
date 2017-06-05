@@ -5,7 +5,7 @@ GameObject::GameObject()
 {
 }
 
-GameObject::GameObject(Matrix3 transform, aie::Texture* texture, std::vector<Vector3> points)
+GameObject::GameObject(Matrix3 transform, TexturePtr texture, std::vector<Vector3> points)
 {
 	// set the position, rotation, and texture to the values given
 	m_transform = transform;

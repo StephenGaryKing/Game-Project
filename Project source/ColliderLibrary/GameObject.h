@@ -3,6 +3,9 @@
 #include "Renderer2D.h"
 #include "Texture.h"
 #include "Input.h"
+#include "Resource.h"
+
+typedef std::shared_ptr<Resource<aie::Texture>> TexturePtr;
 
 struct Hit
 {
@@ -44,7 +47,7 @@ public:
 
 	bool m_enabled = true; // this determines if this GameObject should calculate collisions and be drawn
 	Matrix3 m_transform;
-	aie::Texture* m_texture;
+	TexturePtr m_texture;
 	GameObject* m_parent = nullptr;
 	std::vector<GameObject*> m_children;
 	std::vector<Vector3> m_points;
