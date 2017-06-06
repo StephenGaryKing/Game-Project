@@ -129,10 +129,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Component.h" />
+    <ClInclude Include="ComponentList.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="InputComp.h" />
+    <ClInclude Include="TextureComp.h" />
+    <ClInclude Include="TransformComp.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="InputComp.cpp" />
+    <ClCompile Include="TextureComp.cpp" />
+    <ClCompile Include="TransformComp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\bootstrap\Bootstrap.vcxproj">

@@ -20,15 +20,24 @@ bool Application2D::startup() {
 
 	m_gameObjectFactory = std::unique_ptr<GameObjectFactory>(new GameObjectFactory());
 
-	//create some GameObjects to store in the factory
-	std::shared_ptr<GameObject> m_player(new GameObject("player", "./textures/ship.png"));
-	m_player->setPosition(200, 300);
+	//declare the components that will be used
+	ComponentPtr m_transform(new TransformComp(Vector3(500, 500, 1), Vector3(0,0,0)));
+	ComponentPtr m_texture(new TextureComp("./textures/ship.png"));
+	ComponentPtr m_input(new InputComp());
 
-	std::shared_ptr<GameObject> m_lRock(new GameObject("lRock", "./textures/rock_large.png"));
-	m_lRock->setPosition(500, 400);
+	//create some GameObjects to store in the factory
+	std::shared_ptr<GameObject> m_player(new GameObject("player"));
+
+	m_player->addComponent(m_transform);
+	m_player->addComponent(m_texture);
 
 	m_gameObjectFactory->addPrototype(m_player);
-	m_gameObjectFactory->addPrototype(m_lRock);
+
+	// how to create a game object from the factory
+	std::shared_ptr<IPrototype> gameObjectClone;
+	gameObjectClone = m_gameObjectFactory->create("player");
+	std::shared_ptr<GameObject> gameObject = std::dynamic_pointer_cast<GameObject>(gameObjectClone);
+	m_gameObjects.push_back(gameObject);
 
 	m_cameraX = 0;
 	m_cameraY = 0;
@@ -47,6 +56,9 @@ void Application2D::update(float deltaTime) {
 
 	// input example
 	aie::Input* input = aie::Input::getInstance();
+
+
+	/*
 
 	if (m_timer >= 0.5f)
 	{
@@ -69,6 +81,9 @@ void Application2D::update(float deltaTime) {
 		(*it)->Update(deltaTime, input);
 		++it;
 	}
+
+	*/
+
 }
 
 void Application2D::draw() {
@@ -83,10 +98,12 @@ void Application2D::draw() {
 	m_2dRenderer->begin();
 
 	// draw stuff
-	for (std::shared_ptr<GameObject> gameObject : m_gameObjects)
+	for (auto it = m_gameObjects.begin(); it != m_gameObjects.end(); )
 	{
-		gameObject->draw(m_2dRenderer);
+		(*it)->draw(m_2dRenderer);
+		++it;
 	}
+
 
 	// done drawing sprites
 	m_2dRenderer->end();

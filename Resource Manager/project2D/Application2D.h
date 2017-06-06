@@ -7,6 +7,7 @@
 #include "GameObjectFactory.h"
 #include "GameObject.h"
 #include "Resource.h"
+#include "ComponentList.h"
 
 class Application2D : public aie::Application {
 public:

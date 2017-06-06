@@ -1,12 +1,13 @@
+/*
 #include "GameObject.h"
 
 GameObject::GameObject(const std::string name, std::shared_ptr<ResourceBase> texture) :
-	m_name(name), m_texture(texture), m_position(glm::vec2(0, 0)),
-	m_velocity(glm::vec2(0, 0))
+	m_name(name), m_texture(texture), m_transform(Matrix3()),
+	m_velocity(Vector3())
 {}
 
 GameObject::GameObject(const std::string name, const char* filename) :
-	m_name(name), m_position(glm::vec2(0, 0)), m_velocity(glm::vec2(0, 0))
+	m_name(name), m_transform(Matrix3()), m_velocity(Vector3())
 {
 	m_texture = ResourceManager::getInstance().get(filename, ResourceManager::TEXTURE);
 }
@@ -14,7 +15,7 @@ GameObject::GameObject(const std::string name, const char* filename) :
 GameObject::GameObject(const GameObject& other)
 {
 	m_texture = other.m_texture; 
-	m_position = other.m_position; 
+	m_transform = other.m_transform; 
 	m_velocity = other.m_velocity; 
 	m_name = other.m_name;
 }
@@ -27,7 +28,7 @@ GameObject::~GameObject()
 GameObject& GameObject::operator=(const GameObject& other)
 {
 	m_texture = other.m_texture; 
-	m_position = other.m_position; 
+	m_transform = other.m_transform; 
 	m_velocity = other.m_velocity; 
 	m_name = other.m_name; 
 	return *this;
@@ -40,8 +41,8 @@ std::shared_ptr<IPrototype> GameObject::clone()
 
 void GameObject::setPosition(float x, float y)
 {
-	m_position.x = x;
-	m_position.y = y;
+	m_transform[2].x = x;
+	m_transform[2].y = y;
 }
 
 void GameObject::setVelocity(float x, float y)
@@ -52,19 +53,19 @@ void GameObject::setVelocity(float x, float y)
 
 void GameObject::Update(float deltaTime, aie::Input* input)
 {
-	m_position.x += m_velocity.x * deltaTime;
-	m_position.y += m_velocity.y * deltaTime;
+	m_transform[2].x += m_velocity.x * deltaTime;
+	m_transform[2].y += m_velocity.y * deltaTime;
 }
 
 void GameObject::draw(aie::Renderer2D* renderer)
 {
-	renderer->drawSprite(m_texture->as<aie::Texture>(), m_position.x, m_position.y);
+	renderer->drawSpriteTransformed3x3(m_texture->as<aie::Texture>(), m_transform);
 }
 
 
+--------------------------------------------------------------------------------------------------------------------------------
 
 
-/*
 GameObject::GameObject()
 {
 }
