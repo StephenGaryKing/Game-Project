@@ -1,7 +1,11 @@
 #include "Application2D.h"
 #include "Input.h"
 #include <iostream>
+#include "PlayerScript.h"
+#include "AsteroidScript.h"
 #include <glm\glm.hpp>
+#include <chrono>
+#include "States.h"
 
 Application2D::Application2D() {
 
@@ -13,31 +17,26 @@ Application2D::~Application2D() {
 
 bool Application2D::startup() {
 	
+	srand((unsigned int)time(NULL));
+
 	m_2dRenderer = new aie::Renderer2D();
+	m_input = aie::Input::getInstance();
+
+	gameStateManager = new GameStateManager((int)eGameState::STATE_COUNT, m_input, m_2dRenderer);
 
 	setBackgroundColour(0.7f, 0.7f, 0.7f, 1);
 
 
 	m_gameObjectFactory = std::unique_ptr<GameObjectFactory>(new GameObjectFactory());
 
-	//declare the components that will be used
-	ComponentPtr m_transform(new TransformComp(Vector3(500, 500, 1), Vector3(0,0,0)));
-	ComponentPtr m_texture(new TextureComp("./textures/ship.png"));
-	ComponentPtr m_input(new InputComp());
+	// register states
 
-	//create some GameObjects to store in the factory
-	std::shared_ptr<GameObject> m_player(new GameObject("player"));
+	gameStateManager->registerState((int)eGameState::SPLASH, new SpashScreenState());
+	gameStateManager->registerState((int)eGameState::MENU, new MainMenuState());
+	gameStateManager->registerState((int)eGameState::INGAME, new InGameState());
+	gameStateManager->registerState((int)eGameState::PAUSE, new PausedState());
 
-	m_player->addComponent(m_transform);
-	m_player->addComponent(m_texture);
-
-	m_gameObjectFactory->addPrototype(m_player);
-
-	// how to create a game object from the factory
-	std::shared_ptr<IPrototype> gameObjectClone;
-	gameObjectClone = m_gameObjectFactory->create("player");
-	std::shared_ptr<GameObject> gameObject = std::dynamic_pointer_cast<GameObject>(gameObjectClone);
-	m_gameObjects.push_back(gameObject);
+	gameStateManager->pushState((int)eGameState::INGAME);
 
 	m_cameraX = 0;
 	m_cameraY = 0;
@@ -54,9 +53,13 @@ void Application2D::update(float deltaTime) {
 
 	m_timer += deltaTime;
 
-	// input example
-	aie::Input* input = aie::Input::getInstance();
+	gameStateManager->update(deltaTime);
 
+	//for (auto it = m_gameObjects.begin(); it != m_gameObjects.end(); )
+	//{
+	//	(*it)->update(deltaTime, input);
+	//	++it;
+	//}
 
 	/*
 
@@ -97,13 +100,7 @@ void Application2D::draw() {
 	// begin drawing sprites
 	m_2dRenderer->begin();
 
-	// draw stuff
-	for (auto it = m_gameObjects.begin(); it != m_gameObjects.end(); )
-	{
-		(*it)->draw(m_2dRenderer);
-		++it;
-	}
-
+	gameStateManager->draw();
 
 	// done drawing sprites
 	m_2dRenderer->end();

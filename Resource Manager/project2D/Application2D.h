@@ -4,6 +4,7 @@
 #include "Renderer2D.h"
 #include <list>
 #include "ResourceManager.h"
+#include "GameStateManager.h"
 #include "GameObjectFactory.h"
 #include "GameObject.h"
 #include "Resource.h"
@@ -23,10 +24,12 @@ public:
 
 protected:
 
+	GameStateManager* gameStateManager;
+
 	std::unique_ptr<GameObjectFactory>		m_gameObjectFactory;
-	std::list<std::shared_ptr<GameObject>>	m_gameObjects;
 
 	aie::Renderer2D*					m_2dRenderer;
+	aie::Input*							m_input;
 
 	float m_cameraX, m_cameraY;
 	float m_timer;

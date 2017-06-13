@@ -7,7 +7,9 @@
     <ClCompile Include="TransformComp.cpp">
       <Filter>Components\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="InputComp.cpp" />
+    <ClCompile Include="MouseInputComp.cpp">
+      <Filter>Components\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -25,7 +27,9 @@
     <ClInclude Include="ComponentList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="InputComp.h" />
+    <ClInclude Include="MouseInputComp.h">
+      <Filter>Components\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">

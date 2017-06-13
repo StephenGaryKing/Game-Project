@@ -132,12 +132,12 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="ComponentList.h" />
     <ClInclude Include="GameObject.h" />
-    <ClInclude Include="InputComp.h" />
+    <ClInclude Include="MouseInputComp.h" />
     <ClInclude Include="TextureComp.h" />
     <ClInclude Include="TransformComp.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="InputComp.cpp" />
+    <ClCompile Include="MouseInputComp.cpp" />
     <ClCompile Include="TextureComp.cpp" />
     <ClCompile Include="TransformComp.cpp" />
   </ItemGroup>

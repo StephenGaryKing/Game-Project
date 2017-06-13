@@ -31,16 +31,12 @@ public:
 		return nullptr;
 	}
 
-	virtual void update(float deltaTime, aie::Input* input) {
-		if (m_input = nullptr)
-			m_input = input;
+	virtual void update(float deltaTime) {
 		for (auto& component : m_components)
 			component->update(this, deltaTime);
 	}
 
-	virtual void draw(aie::Renderer2D* renderer) {
-		if (m_renderer == nullptr)
-			m_renderer = renderer;
+	virtual void draw() {
 		for (auto& component : m_components)
 			component->draw(this);
 	}
