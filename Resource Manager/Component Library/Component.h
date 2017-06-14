@@ -9,6 +9,7 @@ enum ComponentType
 	TRANSFORM = 0,
 	TEXTURE,
 	INPUT,
+	ANIMATION,
 	SCRIPT
 };
 

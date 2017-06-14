@@ -21,22 +21,21 @@ bool Application2D::startup() {
 
 	m_2dRenderer = new aie::Renderer2D();
 	m_input = aie::Input::getInstance();
+	m_gameObjectFactory = std::shared_ptr<GameObjectFactory>(new GameObjectFactory());
 
-	gameStateManager = new GameStateManager((int)eGameState::STATE_COUNT, m_input, m_2dRenderer);
+	gameStateManager = new GameStateManager((int)eGameState::STATE_COUNT, m_input, m_2dRenderer, m_gameObjectFactory);
 
 	setBackgroundColour(0.7f, 0.7f, 0.7f, 1);
 
-
-	m_gameObjectFactory = std::unique_ptr<GameObjectFactory>(new GameObjectFactory());
-
 	// register states
 
-	gameStateManager->registerState((int)eGameState::SPLASH, new SpashScreenState());
+	gameStateManager->registerState((int)eGameState::SPLASH, new SplashScreenState());
 	gameStateManager->registerState((int)eGameState::MENU, new MainMenuState());
 	gameStateManager->registerState((int)eGameState::INGAME, new InGameState());
 	gameStateManager->registerState((int)eGameState::PAUSE, new PausedState());
 
-	gameStateManager->pushState((int)eGameState::INGAME);
+	gameStateManager->pushState((int)eGameState::SPLASH);
+	//gameStateManager->pushState((int)eGameState::INGAME);
 
 	m_cameraX = 0;
 	m_cameraY = 0;
@@ -54,39 +53,6 @@ void Application2D::update(float deltaTime) {
 	m_timer += deltaTime;
 
 	gameStateManager->update(deltaTime);
-
-	//for (auto it = m_gameObjects.begin(); it != m_gameObjects.end(); )
-	//{
-	//	(*it)->update(deltaTime, input);
-	//	++it;
-	//}
-
-	/*
-
-	if (m_timer >= 0.5f)
-	{
-		m_timer = 0;
-
-		std::shared_ptr<IPrototype> gameObjectClone;
-		if (rand() % 2 == 0)
-			gameObjectClone = m_gameObjectFactory->create("player");
-		else
-			gameObjectClone = m_gameObjectFactory->create("lRock");
-
-		// dynamically cast the shared pointer from IPrototype to snack
-		std::shared_ptr<GameObject> gameObject = std::dynamic_pointer_cast<GameObject>(gameObjectClone);
-		gameObject->setVelocity(50.0f - rand() % 100, 50.0f - rand() % 100);
-		m_gameObjects.push_back(gameObject);
-	}
-
-	for ( auto it = m_gameObjects.begin(); it != m_gameObjects.end(); )
-	{
-		(*it)->Update(deltaTime, input);
-		++it;
-	}
-
-	*/
-
 }
 
 void Application2D::draw() {

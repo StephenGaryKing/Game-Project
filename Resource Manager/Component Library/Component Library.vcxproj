@@ -129,6 +129,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AnimationComp.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="ComponentList.h" />
     <ClInclude Include="GameObject.h" />
@@ -137,6 +138,7 @@
     <ClInclude Include="TransformComp.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AnimationComp.cpp" />
     <ClCompile Include="MouseInputComp.cpp" />
     <ClCompile Include="TextureComp.cpp" />
     <ClCompile Include="TransformComp.cpp" />

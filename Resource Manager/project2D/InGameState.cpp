@@ -2,6 +2,7 @@
 #include "ComponentList.h"
 #include "PlayerScript.h"
 #include "AsteroidScript.h"
+#include "GameStateManager.h"
 
 InGameState::InGameState()
 {
@@ -12,17 +13,17 @@ void InGameState::onEnter()
 	// add the player
 
 	//declare the components that will be used
-	ComponentPtr transform(new TransformComp(Vector3(500, 500, 1), Vector3(0, 0, 0)));
+	ComponentPtr playerTransform(new TransformComp(Vector3(500, 500, 1), Vector3(0, 0, 0)));
 	ComponentPtr playerTexture(new TextureComp("./textures/ship.png"));
-	ComponentPtr input(new MouseInputComp());
+	ComponentPtr playerInput(new MouseInputComp());
 	ComponentPtr playerScript(new PlayerScript());
 
 	//create some GameObjects to store in the factory
 	std::shared_ptr<GameObject> m_player(new GameObject("player"));
 
-	m_player->addComponent(transform);
+	m_player->addComponent(playerTransform);
 	m_player->addComponent(playerTexture);
-	m_player->addComponent(input);
+	m_player->addComponent(playerInput);
 	m_player->addComponent(playerScript);
 	m_player->m_input = m_input;
 	m_player->m_renderer = m_renderer;
@@ -91,11 +92,19 @@ void InGameState::onExit()
 
 void InGameState::onUpdate(float deltaTime)
 {
-
+	if (m_active)
+	{
+		for (auto it = m_gameObjects.begin(); it != m_gameObjects.end(); )
+		{
+			(*it)->update(deltaTime);
+			++it;
+		}
+	}
 }
 
 void InGameState::onDraw()
 {
+
 	for (auto it = m_gameObjects.begin(); it != m_gameObjects.end(); )
 	{
 		(*it)->draw();

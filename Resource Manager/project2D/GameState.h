@@ -1,6 +1,10 @@
 #pragma once
 #include "Input.h"
+#include "GameObject.h"
+#include "GameObjectFactory.h"
 #include "Renderer2D.h"
+#include <list>
+#include <memory>
 
 class GameState {
 	friend class GameStateManager;
@@ -28,6 +32,9 @@ protected:
 protected:
 	aie::Input*			m_input;
 	aie::Renderer2D*	m_renderer;
+	std::shared_ptr<GameObjectFactory> m_gameObjectFactory;
+	std::list<std::shared_ptr<GameObject>>	m_gameObjects;
+	GameStateManager* m_gameStateManager;
 	bool m_active = false;
 };
 

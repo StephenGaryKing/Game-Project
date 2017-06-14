@@ -26,7 +26,7 @@ protected:
 
 	GameStateManager* gameStateManager;
 
-	std::unique_ptr<GameObjectFactory>		m_gameObjectFactory;
+	std::shared_ptr<GameObjectFactory>		m_gameObjectFactory;
 
 	aie::Renderer2D*					m_2dRenderer;
 	aie::Input*							m_input;

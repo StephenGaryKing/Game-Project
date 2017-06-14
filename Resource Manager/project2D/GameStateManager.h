@@ -15,11 +15,12 @@ enum class eGameState
 class GameStateManager
 {
 public:
-	GameStateManager(unsigned int stateCount, aie::Input* input, aie::Renderer2D* renderer)
+	GameStateManager(unsigned int stateCount, aie::Input* input, aie::Renderer2D* renderer, std::shared_ptr<GameObjectFactory> gameObjectFactory)
 	{
 		m_registeredStates.resize(stateCount);
 		m_input = input;
 		m_renderer = renderer;
+		m_gameObjectFactory = gameObjectFactory;
 	}
 	~GameStateManager()
 	{
@@ -27,7 +28,15 @@ public:
 			delete state;
 	}
 
-	void registerState(int id, GameState* state) { state->m_input = m_input; state->m_renderer = m_renderer; m_registeredStates[id] = state; }
+	void registerState(int id, GameState* state) 
+	{
+		state->m_input = m_input; 
+		state->m_renderer = m_renderer; 
+		state->m_gameObjectFactory = m_gameObjectFactory; 
+		state->m_gameStateManager = this;
+		m_registeredStates[id] = state; 
+	}
+
 	void pushState(int id) { m_pushedStates.push_back(m_registeredStates[id]); }
 	void popState() { m_popState = true; }
 
@@ -86,5 +95,6 @@ private:
 
 	aie::Renderer2D*			m_renderer = nullptr;
 	aie::Input*					m_input = nullptr;
+	std::shared_ptr<GameObjectFactory> m_gameObjectFactory;
 };
 

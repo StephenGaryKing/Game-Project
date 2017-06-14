@@ -1,19 +1,20 @@
 #pragma once
 #include "GameState.h"
-#include <memory>
-#include <list>
-#include "GameObject.h"
-#include "GameObjectFactory.h"
 
-class SpashScreenState
+class SplashScreenState
 	: public GameState
 {
 public:
-	SpashScreenState();
-	~SpashScreenState();
+	SplashScreenState();
+	~SplashScreenState();
+
+	virtual void onEnter();
+	virtual void onPopped();
 
 	virtual void onUpdate(float deltaTime);
 	virtual void onDraw();
+
+	float m_timer = 0;
 };
 
 
@@ -41,9 +42,6 @@ public:
 
 	virtual void onUpdate(float deltaTime);
 	virtual void onDraw();
-
-	std::unique_ptr<GameObjectFactory> m_gameObjectFactory;
-	std::list<std::shared_ptr<GameObject>>	m_gameObjects;
 	
 };
 

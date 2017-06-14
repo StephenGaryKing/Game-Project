@@ -93,7 +93,6 @@
     <ClCompile Include="Application2D.cpp" />
     <ClCompile Include="AsteroidScript.cpp" />
     <ClCompile Include="GameObjectFactory.cpp" />
-    <ClCompile Include="GameStateManager.cpp" />
     <ClCompile Include="InGameState.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuState.cpp" />

@@ -33,9 +33,6 @@
     <ClCompile Include="AsteroidScript.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameStateManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SplashScreenState.cpp">
       <Filter>Source Files\States</Filter>
     </ClCompile>
