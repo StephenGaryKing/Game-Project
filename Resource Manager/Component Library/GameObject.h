@@ -13,7 +13,23 @@ public:
 	GameObject(const std::string name) : m_name(name) {};
 	virtual ~GameObject() {}
 
-	virtual std::shared_ptr<IPrototype> clone() { return std::shared_ptr<IPrototype>(new GameObject(*this)); }
+	virtual std::shared_ptr<IPrototype> clone() 
+	{
+		std::shared_ptr<IPrototype> gameObjectClone(new GameObject(*this));
+		std::dynamic_pointer_cast<GameObject>(gameObjectClone)->cloneComponents();
+		return gameObjectClone;
+	}
+
+	//accessed when the Game object factory makes a clone of this object
+	void cloneComponents()
+	{
+		for (auto& Component : m_components)
+		{
+			Component = Component->clone();
+		}
+
+	}
+
 	virtual std::string getName() { return m_name; }
 
 	void addComponent(const ComponentPtr& component) {

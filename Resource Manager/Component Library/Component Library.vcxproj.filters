@@ -13,6 +13,9 @@
     <ClCompile Include="AnimationComp.cpp">
       <Filter>Components\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ButtonComp.cpp">
+      <Filter>Components\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -34,6 +37,9 @@
       <Filter>Components\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AnimationComp.h">
+      <Filter>Components\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtonComp.h">
       <Filter>Components\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

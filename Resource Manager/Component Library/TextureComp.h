@@ -13,6 +13,11 @@ public:
 		m_componentType = ComponentType::TEXTURE;
 	}
 
+	virtual ComponentPtr clone()
+	{
+		return ComponentPtr(new TextureComp(*this));
+	}
+
 	virtual void update(GameObject* gameObject, float deltaTime);
 
 	virtual void draw(GameObject* gameObject);

@@ -8,13 +8,16 @@ public:
 	SplashScreenState();
 	~SplashScreenState();
 
-	virtual void onEnter();
+	virtual void onPushed();
 	virtual void onPopped();
 
 	virtual void onUpdate(float deltaTime);
 	virtual void onDraw();
 
 	float m_timer = 0;
+	float m_timeToWait = 5;
+
+	void createGameObjects();
 };
 
 
@@ -25,8 +28,13 @@ public:
 	MainMenuState();
 	~MainMenuState();
 
+	virtual void onPushed();
+	virtual void onPopped();
+
 	virtual void onUpdate(float deltaTime);
 	virtual void onDraw();
+
+	void createGameObjects();
 };
 
 
@@ -42,6 +50,8 @@ public:
 
 	virtual void onUpdate(float deltaTime);
 	virtual void onDraw();
+
+	void createGameObjects();
 	
 };
 
@@ -55,4 +65,19 @@ public:
 
 	virtual void onUpdate(float deltaTime);
 	virtual void onDraw();
+
+	void createGameObjects();
+};
+
+class GameOverState
+	: public GameState
+{
+public:
+	GameOverState();
+	~GameOverState();
+
+	virtual void onUpdate(float deltaTime);
+	virtual void onDraw();
+
+	void createGameObjects();
 };

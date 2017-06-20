@@ -3,3 +3,4 @@
 #include "TextureComp.h"
 #include "MouseInputComp.h"
 #include "AnimationComp.h"
+#include "ButtonComp.h"

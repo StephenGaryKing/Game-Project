@@ -130,6 +130,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AnimationComp.h" />
+    <ClInclude Include="ButtonComp.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="ComponentList.h" />
     <ClInclude Include="GameObject.h" />
@@ -139,6 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnimationComp.cpp" />
+    <ClCompile Include="ButtonComp.cpp" />
     <ClCompile Include="MouseInputComp.cpp" />
     <ClCompile Include="TextureComp.cpp" />
     <ClCompile Include="TransformComp.cpp" />

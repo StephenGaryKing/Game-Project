@@ -93,11 +93,14 @@
     <ClCompile Include="Application2D.cpp" />
     <ClCompile Include="AsteroidScript.cpp" />
     <ClCompile Include="GameObjectFactory.cpp" />
+    <ClCompile Include="GameOverState.cpp" />
     <ClCompile Include="InGameState.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="PausedState.cpp" />
+    <ClCompile Include="PlayButtonScript.cpp" />
     <ClCompile Include="PlayerScript.cpp" />
+    <ClCompile Include="QuitButtonScript.cpp" />
     <ClCompile Include="SplashScreenState.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -107,7 +110,9 @@
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameStateManager.h" />
     <ClInclude Include="IPrototype.h" />
+    <ClInclude Include="PlayButtonScript.h" />
     <ClInclude Include="PlayerScript.h" />
+    <ClInclude Include="QuitButtonScript.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceBase.h" />
     <ClInclude Include="ResourceManager.h" />

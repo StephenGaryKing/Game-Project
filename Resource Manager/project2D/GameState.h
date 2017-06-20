@@ -30,11 +30,11 @@ protected:
 	virtual void onPopped() {}
 
 protected:
-	aie::Input*			m_input;
-	aie::Renderer2D*	m_renderer;
-	std::shared_ptr<GameObjectFactory> m_gameObjectFactory;
+	aie::Input*								m_input;
+	aie::Renderer2D*						m_renderer;
+	std::shared_ptr<GameObjectFactory>		m_gameObjectFactory;
 	std::list<std::shared_ptr<GameObject>>	m_gameObjects;
-	GameStateManager* m_gameStateManager;
+	GameStateManager*						m_gameStateManager;
 	bool m_active = false;
 };
 
