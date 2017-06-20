@@ -24,13 +24,12 @@ public:
 
 protected:
 
-	GameStateManager* gameStateManager;
+	std::shared_ptr<GameStateManager>	m_gameStateManager;
 
-	std::shared_ptr<GameObjectFactory>		m_gameObjectFactory;
+	std::shared_ptr<GameObjectFactory>	m_gameObjectFactory;
 
 	aie::Renderer2D*					m_2dRenderer;
 	aie::Input*							m_input;
 
 	float m_cameraX, m_cameraY;
-	float m_timer;
 };

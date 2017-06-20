@@ -7,18 +7,24 @@ class AnimationComp
 	: public Component
 {
 public:
-	AnimationComp(std::string foldername, int amountOfFrames)
+	AnimationComp(std::string foldername, int amountOfFrames, int fps)
 	{
 		m_folderName = foldername;
 		m_amountOfFrames = amountOfFrames;
+		m_fps = fps;
 		m_componentType = ComponentType::ANIMATION;
 
-		m_frames = new aie::Texture*[amountOfFrames];
-		for (int i = 1; i < amountOfFrames; i++)
+		m_frames = new std::shared_ptr<ResourceBase>[amountOfFrames];
+		for (int i = 0; i < amountOfFrames; i++)
 		{
-			std::string temp = foldername + "frame_" + std::to_string(i) + ".png";
-			m_frames[i - 1] = new aie::Texture(temp.c_str());
+			std::string temp = foldername + "frame_" + std::to_string(i+1) + ".png";
+			m_frames[i] = ResourceManager::getInstance().get(temp.c_str(), ResourceManager::TEXTURE);
 		}
+	}
+
+	virtual ComponentPtr clone()
+	{
+		return ComponentPtr(new AnimationComp(*this));
 	}
 
 	virtual void update(GameObject* gameObject, float deltaTime);
@@ -27,6 +33,9 @@ public:
 
 	std::string		m_folderName;
 	int				m_amountOfFrames;
-	aie::Texture**	m_frames;
-	bool			m_looping;
+	std::shared_ptr<ResourceBase>* m_frames;
+	int				m_fps;
+	float			m_timer = 0;
+	int				m_frameToRender = 0;
+	bool			m_looping = false;
 };

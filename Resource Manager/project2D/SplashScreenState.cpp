@@ -6,10 +6,16 @@ SplashScreenState::SplashScreenState()
 {
 }
 
-void SplashScreenState::onEnter()
+void SplashScreenState::onPushed()
 {
-	ComponentPtr splashTransform(new TransformComp(Vector3(200, 400, 1), Vector3(0,0,0)));
-	ComponentPtr splashAnimation(new AnimationComp("./textures/splashAnimation/", 4));
+	if (m_gameObjects.size() == 0)
+		createGameObjects();
+}
+
+void SplashScreenState::createGameObjects()
+{
+	ComponentPtr splashTransform(new TransformComp(Vector3((float)m_gameStateManager->m_application->getWindowWidth() / 2, (float)m_gameStateManager->m_application->getWindowHeight() / 2, 1), Vector3(0, 0, 0), 10));
+	ComponentPtr splashAnimation(new AnimationComp("./textures/splashAnimation/", 36, 20));
 	std::dynamic_pointer_cast<AnimationComp>(splashAnimation)->m_looping = true;
 
 	std::shared_ptr<GameObject> m_splash(new GameObject("splash"));
@@ -30,8 +36,24 @@ void SplashScreenState::onUpdate(float deltaTime)
 {
 	m_timer += deltaTime;
 
-	if (m_timer >= 5)
+	if (m_input->isKeyDown(aie::INPUT_KEY_SPACE))
+	{
+		m_timer = 0;
 		m_gameStateManager->popState();
+	}
+
+	for (auto it = m_gameObjects.begin(); it != m_gameObjects.end(); )
+	{
+		(*it)->update(deltaTime);
+		++it;
+	}
+
+	if (m_timer >= m_timeToWait)
+	{
+		m_timer = 0;
+		m_gameStateManager->popState();
+	}
+		
 }
 
 void SplashScreenState::onDraw()

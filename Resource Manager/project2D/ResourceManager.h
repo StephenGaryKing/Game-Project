@@ -1,5 +1,5 @@
 #pragma once
-#include <vector>
+#include "DynamicArray.h"
 #include "Resource.h"
 #include "Texture.h"
 #include "Font.h"
@@ -16,7 +16,7 @@ public:
 		AUDIO
 	};
 
-	std::vector< std::shared_ptr<ResourceBase> > m_resources; 
+	DynamicArray< std::shared_ptr<ResourceBase> > m_resources; 
 
 	ResourceManager() {};
 	ResourceManager(const ResourceManager&) {}; 
@@ -32,13 +32,10 @@ public:
 
 	std::shared_ptr<ResourceBase> get(const std::string filename, ResourceType type) 
 	{
-		std::vector< std::shared_ptr<ResourceBase> >::iterator it;
-		for (it = m_resources.begin(); it != m_resources.end(); it++)
+		for (int i = 0; i < m_resources.size(); i++)
 		{
-			if (filename.compare((*it)->getFilename()) == 0)
-			{
-				return (*it);
-			}
+			if (filename.compare(m_resources[i]->getFilename()) == 0)
+				return m_resources[i];
 		}
 
 		switch (type) 
@@ -46,21 +43,21 @@ public:
 			case ResourceType::TEXTURE: 
 			{ 
 				std::shared_ptr<ResourceBase> resource(new Resource<aie::Texture>(filename)); 
-				m_resources.push_back(resource);
+				m_resources.pushBack(resource);
 				return resource; 
 			} 
 			
 			case ResourceType::FONT: 
 			{ 
 				std::shared_ptr<ResourceBase> resource(new Resource<aie::Font>(filename, 32)); 
-				m_resources.push_back(resource); 
+				m_resources.pushBack(resource); 
 				return resource; 
 			} 
 			
 			case ResourceType::AUDIO: 
 			{ 
 				std::shared_ptr<ResourceBase> resource(new Resource<aie::Audio>(filename)); 
-				m_resources.push_back(resource); 
+				m_resources.pushBack(resource); 
 				return resource; 
 			} 
 			
@@ -74,14 +71,21 @@ public:
 	}
 	void collectGarbage() 
 	{
-		for (std::vector< std::shared_ptr<ResourceBase> >::iterator it =
-			m_resources.begin(); it != m_resources.end(); )
-
+		for (int i = 0; i < m_resources.size(); i++)
 		{
-			if ((*it).use_count() == 1)
-				it = m_resources.erase(it);
+			if (m_resources[i].use_count() == 1)
+				m_resources.erase(i);
 			else
-				++it;
+				i++;
 		}
+
+		//for (std::vector< std::shared_ptr<ResourceBase> >::iterator it =
+		//	m_resources.begin(); it != m_resources.end(); )
+		//{
+		//	if ((*it).use_count() == 1)
+		//		it = m_resources.erase(it);
+		//	else
+		//		++it;
+		//}
 	} 
 };

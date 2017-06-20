@@ -3,7 +3,7 @@
 #include "ResourceManager.h"
 #include "IPrototype.h"
 #include "Component.h"
-#include <vector>
+#include "DynamicArray.h"
 #include "Renderer2D.h"
 #include "Input.h"
 
@@ -13,21 +13,33 @@ public:
 	GameObject(const std::string name) : m_name(name) {};
 	virtual ~GameObject() {}
 
-	virtual std::shared_ptr<IPrototype> clone() { return std::shared_ptr<IPrototype>(new GameObject(*this)); }
+	virtual std::shared_ptr<IPrototype> clone() 
+	{
+		std::shared_ptr<IPrototype> gameObjectClone(new GameObject(*this));
+		std::dynamic_pointer_cast<GameObject>(gameObjectClone)->cloneComponents();
+		return gameObjectClone;
+	}
+
+	//accessed when the Game object factory makes a clone of this object
+	void cloneComponents() {
+
+		for (auto& component : m_components)
+			component = component->clone();
+
+	}
+
 	virtual std::string getName() { return m_name; }
 
 	void addComponent(const ComponentPtr& component) {
-		m_components.push_back(component);
+		m_components.pushBack(component);
 	}
 
 	template<class T>
 	std::shared_ptr<T> getComponent(ComponentType type)
 	{
 		for (auto component : m_components)
-		{
 			if (component->m_componentType == type)
 				return std::dynamic_pointer_cast<T>(component);
-		}
 		return nullptr;
 	}
 
@@ -46,7 +58,7 @@ public:
 
 protected:
 	std::string					m_name;
-	std::vector<ComponentPtr>	m_components;
+	DynamicArray<ComponentPtr>	m_components; //use linked list
 
 };
 

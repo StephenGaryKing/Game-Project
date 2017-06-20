@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
 #include "GameState.h"
+#include "Vector3.h"
+#include "Application2D.h"
 
 enum class eGameState
 {
@@ -37,8 +39,13 @@ public:
 		m_registeredStates[id] = state; 
 	}
 
-	void pushState(int id) { m_pushedStates.push_back(m_registeredStates[id]); }
-	void popState() { m_popState = true; }
+	void pushState(int id) 
+	{
+		m_pushedStates.push_back(m_registeredStates[id]); 
+	}
+	void popState() { 
+		m_popState = true; 
+	}
 
 	void update(float deltaTime)
 	{
@@ -55,6 +62,7 @@ public:
 			//activate the one under the previous top if it exists
 			if (m_stateStack.empty() == false)
 				m_stateStack.back()->enter();
+
 		}
 
 		for (auto pushedState : m_pushedStates)
@@ -70,8 +78,8 @@ public:
 		}
 		m_pushedStates.clear();
 
-		for (auto state : m_stateStack)
-			state->onUpdate(deltaTime);
+		for (int i = 0; i < (int)m_stateStack.size(); i++)
+			m_stateStack[i]->onUpdate(deltaTime);
 	}
 
 	void draw()
@@ -85,16 +93,43 @@ public:
 	GameState* getTopState() const { return m_stateStack.back(); }
 	GameState* getState(int id) const { return m_registeredStates[id]; }
 
+	void popDownTo(int id)
+	{
+		for (int i = 0; i < (int)m_stateStack.size() - 1; i++)
+		{
+			if (m_stateStack[i] == m_registeredStates[id])
+			{
+				int index = (int)m_stateStack.size() - 1 - i;
+				for (int j = 0; j < index; j++)
+				{
+					// deactivate previous top
+					m_stateStack.back()->exit();
+					auto temp = m_stateStack.back();
+					m_stateStack.pop_back();
+					temp->onPopped();
+
+					//activate the one under the previous top if it exists
+					if (m_stateStack.empty() == false)
+						m_stateStack.back()->enter();
+				}
+				return;
+			}
+		}
+	}
+	
+	aie::Application*						m_application;		
+
 private:
 
-	std::vector<GameState*> m_pushedStates;
+	std::vector<GameState*>					m_pushedStates;
 	bool m_popState = false;
 
-	std::vector<GameState*> m_stateStack;
-	std::vector<GameState*> m_registeredStates;
+	std::vector<GameState*>					m_stateStack;
+	std::vector<GameState*>					m_registeredStates;
 
-	aie::Renderer2D*			m_renderer = nullptr;
-	aie::Input*					m_input = nullptr;
-	std::shared_ptr<GameObjectFactory> m_gameObjectFactory;
+	aie::Renderer2D*						m_renderer = nullptr;
+	aie::Input*								m_input = nullptr;
+
+	std::shared_ptr<GameObjectFactory>		m_gameObjectFactory;
 };
 

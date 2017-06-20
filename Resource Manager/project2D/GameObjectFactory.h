@@ -1,5 +1,5 @@
 #pragma once
-#include <vector>
+#include "DynamicArray.h"
 #include <memory>
 
 class IPrototype;
@@ -15,5 +15,5 @@ public:
 	std::shared_ptr<IPrototype> create(const char* name);
 
 private:
-	std::vector<std::shared_ptr<IPrototype>> m_prototypes;
+	DynamicArray<std::shared_ptr<IPrototype>> m_prototypes;
 };

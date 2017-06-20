@@ -16,6 +16,9 @@
     <Filter Include="Source Files\States">
       <UniqueIdentifier>{eef4ad98-f34c-496e-8066-5390c15122ed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject Scripts">
+      <UniqueIdentifier>{4f8cb809-3b8a-4b8c-babc-4e239f92b38e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application2D.cpp">
@@ -25,12 +28,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GameObjectFactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerScript.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AsteroidScript.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SplashScreenState.cpp">
@@ -44,6 +41,24 @@
     </ClCompile>
     <ClCompile Include="PausedState.cpp">
       <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="AsteroidScript.cpp">
+      <Filter>GameObject Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerScript.cpp">
+      <Filter>GameObject Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayButtonScript.cpp">
+      <Filter>GameObject Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="QuitButtonScript.cpp">
+      <Filter>GameObject Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOverState.cpp">
+      <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuButtonScript.cpp">
+      <Filter>GameObject Scripts</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -65,12 +80,6 @@
     <ClInclude Include="GameObjectFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerScript.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AsteroidScript.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameStateManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -79,6 +88,21 @@
     </ClInclude>
     <ClInclude Include="States.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerScript.h">
+      <Filter>GameObject Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="AsteroidScript.h">
+      <Filter>GameObject Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayButtonScript.h">
+      <Filter>GameObject Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="QuitButtonScript.h">
+      <Filter>GameObject Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuButtonScript.h">
+      <Filter>GameObject Scripts</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -8,7 +8,8 @@ enum ComponentType
 {
 	TRANSFORM = 0,
 	TEXTURE,
-	INPUT,
+	BUTTON,
+	MOUSEINPUT,
 	ANIMATION,
 	SCRIPT
 };
@@ -19,6 +20,8 @@ public:
 	virtual ~Component() {};
 
 	virtual void update(GameObject* gameObject, float deltaTime) = 0;
+
+	virtual std::shared_ptr<Component> clone() = 0;
 
 	virtual void draw(GameObject* gameObject) {}
 
