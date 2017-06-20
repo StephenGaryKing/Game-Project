@@ -111,7 +111,10 @@
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameStateManager.h" />
     <ClInclude Include="IPrototype.h" />
+<<<<<<< HEAD
     <ClInclude Include="MenuButtonScript.h" />
+=======
+>>>>>>> origin/master
     <ClInclude Include="PlayButtonScript.h" />
     <ClInclude Include="PlayerScript.h" />
     <ClInclude Include="QuitButtonScript.h" />

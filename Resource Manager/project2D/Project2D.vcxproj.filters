@@ -57,9 +57,12 @@
     <ClCompile Include="GameOverState.cpp">
       <Filter>Source Files\States</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="MenuButtonScript.cpp">
       <Filter>GameObject Scripts</Filter>
     </ClCompile>
+=======
+>>>>>>> origin/master
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application2D.h">
@@ -101,8 +104,11 @@
     <ClInclude Include="QuitButtonScript.h">
       <Filter>GameObject Scripts</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="MenuButtonScript.h">
       <Filter>GameObject Scripts</Filter>
     </ClInclude>
+=======
+>>>>>>> origin/master
   </ItemGroup>
 </Project>

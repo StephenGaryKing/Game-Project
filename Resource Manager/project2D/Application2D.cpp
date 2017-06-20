@@ -22,6 +22,7 @@ bool Application2D::startup() {
 	m_2dRenderer = new aie::Renderer2D();
 	m_input = aie::Input::getInstance();
 	m_gameObjectFactory = std::shared_ptr<GameObjectFactory>(new GameObjectFactory());
+	m_windowSize = new Vector3((float)getWindowWidth(), (float)getWindowHeight(), 0.0f);
 
 	m_gameStateManager = std::shared_ptr<GameStateManager>(new GameStateManager((int)eGameState::STATE_COUNT, m_input, m_2dRenderer, m_gameObjectFactory));
 	m_gameStateManager->m_application = this;
@@ -48,6 +49,11 @@ void Application2D::shutdown() {
 }
 
 void Application2D::update(float deltaTime) {
+<<<<<<< HEAD
+=======
+
+	m_timer += deltaTime;
+>>>>>>> origin/master
 	m_gameStateManager->update(deltaTime);
 }
 

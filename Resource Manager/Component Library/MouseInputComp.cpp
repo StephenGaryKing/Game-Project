@@ -7,6 +7,7 @@ void MouseInputComp::update(GameObject* gameObject, float deltaTime)
 	m_mouseY = (float)gameObject->m_input->getMouseY();
 	for (int i = 0; i < 3; i++)
 	{
+<<<<<<< HEAD
 		if (m_mouseClicked[i])
 			m_mouseClicked[i] = false;
 
@@ -18,6 +19,12 @@ void MouseInputComp::update(GameObject* gameObject, float deltaTime)
 			m_mouseClicked[i] = true;
 			m_mouseDown[i] = false;
 		}
+=======
+		if (gameObject->m_input->isMouseButtonDown(i))
+			m_keyPressed[i] = true;
+		else
+			m_keyPressed[i] = false;
+>>>>>>> origin/master
 	}
 }
 

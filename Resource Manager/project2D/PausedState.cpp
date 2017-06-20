@@ -1,6 +1,9 @@
 #include "States.h"
 #include "GameStateManager.h"
+<<<<<<< HEAD
 #include "MenuButtonScript.h"
+=======
+>>>>>>> origin/master
 
 PausedState::PausedState()
 {
@@ -46,6 +49,7 @@ void PausedState::createGameObjects()
 
 void PausedState::onUpdate(float deltaTime)
 {
+<<<<<<< HEAD
 	if (m_input->wasKeyPressed(aie::INPUT_KEY_SPACE))
 	{
 		m_gameStateManager->popState();
@@ -55,6 +59,16 @@ void PausedState::onUpdate(float deltaTime)
 	{
 		m_gameStateManager->popDownTo((int)eGameState::MENU);
 	}
+=======
+	if (m_input->wasKeyReleased(aie::INPUT_KEY_SPACE))
+	{
+		m_gameStateManager->popState();
+	}
+}
+
+void PausedState::createGameObjects()
+{
+>>>>>>> origin/master
 
 	for (auto it = m_gameObjects.begin(); it != m_gameObjects.end(); )
 	{
@@ -70,12 +84,15 @@ void PausedState::onDraw()
 		m_gameStateManager->m_application->getWindowHeight() / 2.0f,
 		m_gameStateManager->m_application->getWindowWidth() / 2.0f,
 		m_gameStateManager->m_application->getWindowHeight() / 2.0f);
+<<<<<<< HEAD
 
 	for (auto it = m_gameObjects.begin(); it != m_gameObjects.end(); )
 	{
 		(*it)->draw();
 		++it;
 	}
+=======
+>>>>>>> origin/master
 }
 
 PausedState::~PausedState()

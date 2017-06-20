@@ -22,6 +22,10 @@ public:
 
 	float m_mouseX;
 	float m_mouseY;
+<<<<<<< HEAD
 	bool m_mouseDown[3];
 	bool m_mouseClicked[3];
+=======
+	bool m_keyPressed[3];
+>>>>>>> origin/master
 };

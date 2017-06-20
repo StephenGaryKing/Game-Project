@@ -84,4 +84,20 @@ public:
 	virtual void onDraw();
 
 	void createGameObjects();
+<<<<<<< HEAD
+=======
+};
+
+class GameOverState
+	: public GameState
+{
+public:
+	GameOverState();
+	~GameOverState();
+
+	virtual void onUpdate(float deltaTime);
+	virtual void onDraw();
+
+	void createGameObjects();
+>>>>>>> origin/master
 };

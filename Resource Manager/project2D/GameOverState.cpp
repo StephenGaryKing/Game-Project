@@ -6,10 +6,13 @@ GameOverState::GameOverState()
 {
 }
 
+<<<<<<< HEAD
 void GameOverState::onEnter()
 {
 }
 
+=======
+>>>>>>> origin/master
 void GameOverState::createGameObjects()
 {
 

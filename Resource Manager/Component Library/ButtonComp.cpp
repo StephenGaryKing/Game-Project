@@ -6,7 +6,11 @@
 
 void ButtonComp::update(GameObject* gameObject, float deltaTime)
 {
+<<<<<<< HEAD
 	if (gameObject->getComponent<MouseInputComp>(MOUSEINPUT)->m_mouseClicked[0] == true)
+=======
+	if (gameObject->getComponent<MouseInputComp>(MOUSEINPUT)->m_keyPressed[0] == true)
+>>>>>>> origin/master
 	{
 		float* mouseX = &(gameObject)->getComponent<MouseInputComp>(MOUSEINPUT)->m_mouseX;
 		float* mouseY = &(gameObject)->getComponent<MouseInputComp>(MOUSEINPUT)->m_mouseY;

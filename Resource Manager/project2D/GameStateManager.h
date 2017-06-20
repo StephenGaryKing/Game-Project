@@ -92,6 +92,8 @@ public:
 	int activeStateCount() const { return m_stateStack.size(); }
 	GameState* getTopState() const { return m_stateStack.back(); }
 	GameState* getState(int id) const { return m_registeredStates[id]; }
+	
+	aie::Application*		m_application;		
 
 	void popDownTo(int id)
 	{

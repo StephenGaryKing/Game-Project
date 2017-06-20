@@ -40,14 +40,18 @@ void InGameState::createGameObjects()
 	// add the asteroids
 
 	//declare the components that will be used
+<<<<<<< HEAD
 	ComponentPtr asteroidTransform(new TransformComp(Vector3(0, 0, 1), Vector3(0, 0, 0)));
+=======
+	ComponentPtr asteroidSTransform(new TransformComp(Vector3(0, 0, 1), Vector3(0, 0, 0)));
+>>>>>>> origin/master
 	ComponentPtr asteroidSTexture(new TextureComp("./textures/rock_small.png"));
 	ComponentPtr asteroidScript(new AsteroidScript());
 
 	//create some GameObjects to store in the factory
 	std::shared_ptr<GameObject> m_SRock(new GameObject("SRock"));
 
-	m_SRock->addComponent(asteroidTransform);
+	m_SRock->addComponent(asteroidSTransform);
 	m_SRock->addComponent(asteroidSTexture);
 	m_SRock->addComponent(asteroidScript);
 	m_SRock->getComponent<AsteroidScript>(SCRIPT)->m_gameStateManager = m_gameStateManager;
@@ -58,10 +62,11 @@ void InGameState::createGameObjects()
 
 
 	//create some GameObjects to store in the factory
+	ComponentPtr asteroidMTransform(new TransformComp(Vector3(0, 0, 1), Vector3(0, 0, 0)));
 	ComponentPtr asteroidMTexture(new TextureComp("./textures/rock_medium.png"));
 	std::shared_ptr<GameObject> m_MRock(new GameObject("MRock"));
 
-	m_MRock->addComponent(asteroidTransform);
+	m_MRock->addComponent(asteroidMTransform);
 	m_MRock->addComponent(asteroidMTexture);
 	m_MRock->addComponent(asteroidScript);
 	m_MRock->getComponent<AsteroidScript>(SCRIPT)->m_gameStateManager = m_gameStateManager;
@@ -71,10 +76,11 @@ void InGameState::createGameObjects()
 	m_gameObjectFactory->addPrototype(m_MRock);
 
 	//create some GameObjects to store in the factory
+	ComponentPtr asteroidLTransform(new TransformComp(Vector3(0, 0, 1), Vector3(0, 0, 0)));
 	ComponentPtr asteroidLTexture(new TextureComp("./textures/rock_large.png"));
 	std::shared_ptr<GameObject> m_LRock(new GameObject("LRock"));
 
-	m_LRock->addComponent(asteroidTransform);
+	m_LRock->addComponent(asteroidLTransform);
 	m_LRock->addComponent(asteroidLTexture);
 	m_LRock->addComponent(asteroidScript);
 	m_LRock->getComponent<AsteroidScript>(SCRIPT)->m_gameStateManager = m_gameStateManager;
@@ -108,7 +114,11 @@ void InGameState::onUpdate(float deltaTime)
 {
 	if (m_active)
 	{
+<<<<<<< HEAD
 		if (m_input->wasKeyPressed(aie::INPUT_KEY_SPACE))
+=======
+		if (m_input->wasKeyReleased(aie::INPUT_KEY_SPACE))
+>>>>>>> origin/master
 		{
 			m_gameStateManager->pushState((int)eGameState::PAUSE);
 		}

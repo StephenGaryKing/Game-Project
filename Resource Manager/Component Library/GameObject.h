@@ -21,10 +21,19 @@ public:
 	}
 
 	//accessed when the Game object factory makes a clone of this object
+<<<<<<< HEAD
 	void cloneComponents() {
 
 		for (auto& component : m_components)
 			component = component->clone();
+=======
+	void cloneComponents()
+	{
+		for (auto& Component : m_components)
+		{
+			Component = Component->clone();
+		}
+>>>>>>> origin/master
 
 	}
 

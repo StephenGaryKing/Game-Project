@@ -31,5 +31,6 @@ protected:
 	aie::Renderer2D*					m_2dRenderer;
 	aie::Input*							m_input;
 
+	Vector3* m_windowSize;
 	float m_cameraX, m_cameraY;
 };

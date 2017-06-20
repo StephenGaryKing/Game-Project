@@ -19,7 +19,11 @@ void MainMenuState::onPushed()
 
 void MainMenuState::createGameObjects()
 {
+<<<<<<< HEAD
 	ComponentPtr playBtnTransform(new TransformComp(Vector3((float)m_gameStateManager->m_application->getWindowWidth() / 2, (float)m_gameStateManager->m_application->getWindowHeight() / 10 * 7, 1), Vector3(0, 0, 0), 2));
+=======
+	ComponentPtr playBtnTransform(new TransformComp(Vector3((float)m_gameStateManager->m_application->getWindowWidth() / 2, (float)m_gameStateManager->m_application->getWindowHeight() / 10 * 7, 1), Vector3(0, 0, 0), 4));
+>>>>>>> origin/master
 	ComponentPtr playBtnTexture(new TextureComp("./textures/startBtn.png"));
 	ComponentPtr playBtnMouseInput(new MouseInputComp());
 	ComponentPtr playBtnButtonInput(new ButtonComp());
